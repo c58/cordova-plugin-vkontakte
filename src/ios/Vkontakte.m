@@ -19,12 +19,7 @@
 {
   if (!inited) {
     NSString *appId = [[NSString alloc] initWithString: [command.arguments objectAtIndex:0]];
-    [VKSdk initializeWithDelegate:self andAppId: appId];
-    [[NSNotificationCenter defaultCenter]
-      addObserver: self
-      selector: @selector(myOpenUrl:)
-      name: CDVPluginHandleOpenURLNotification object:nil
-    ];
+    [VKSdk initializeWithDelegate:self andAppId:appId];
     inited = YES;
   }
 
@@ -94,7 +89,8 @@
       permissions = @[VK_PER_WALL, VK_PER_OFFLINE];
     }
 
-    [VKSdk authorize: permissions
+    [VKSdk
+      authorize: permissions
       revokeAccess: NO
       forceOAuth: YES
       inApp: YES
@@ -109,14 +105,6 @@
     vc = [vc nextResponder];
   } while ([vc isKindOfClass:UIView.class]);
   return vc;
-}
-
--(void)myOpenUrl:(NSNotification*)notification
-{
-  NSURL *url = notification.object;
-  if ([url isKindOfClass:NSURL.class]) {
-    BOOL wasHandled = [VKSdk processOpenURL:url fromApplication:nil];
-  }
 }
 
 
