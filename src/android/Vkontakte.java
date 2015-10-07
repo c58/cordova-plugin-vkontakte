@@ -113,31 +113,8 @@ public class Vkontakte extends CordovaPlugin {
           final String token = res.accessToken;
           Log.i(TAG, "VK new token: "+token);
           res.saveTokenToSharedPreferences(getApplicationContext(), sTokenKey);
-          VKRequest request = VKApi.users().get();
-          request.executeWithListener(new VKRequestListener() {
-            @Override
-            public void onComplete(VKResponse response) {
-              try {
-                JSONObject loginDetails = new JSONObject();
-                loginDetails.put("token", token);
-                loginDetails.put("user", response.json.getJSONArray("response"));
-                _callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, loginDetails.toString()));
-                _callbackContext.success();
-              } catch (JSONException exception) {
-                Log.e(TAG, "JSON error:", exception);
-                _callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR));
-                _callbackContext.error("Error");
-              }
-            }
-            @Override
-            public void onError(VKError error) {
-              String err = error.toString();
-              Log.e(TAG, err);
-              _callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, err));
-              _callbackContext.error(error.errorMessage);
-            }
-          });
-          //share(savedUrl, savedComment, savedImageUrl);
+          _callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, token));
+          _callbackContext.success();
         }
 
         @Override
@@ -145,7 +122,6 @@ public class Vkontakte extends CordovaPlugin {
           // User didn't pass Authorization
           String err = error.toString();
           Log.e(TAG, "VK Authorization error! "+err);
-          //new AlertDialog.Builder(getApplicationContext()).setMessage(error.errorMessage).show();
           _callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, err));
           _callbackContext.error(error.errorMessage);
         }
