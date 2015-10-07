@@ -90,7 +90,7 @@
   <platform name="android">
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="Vkontakte">
-        <param name="android-package" value="com.stuytime.vkontakte.Vkontakte"/>
+        <param name="android-package" value="com.studytime.vkontakte.Vkontakte"/>
         <param name="onload" value="true" />
       </feature>
       <access origin="https://oauth.vk.com/*" />
@@ -109,7 +109,7 @@
     </config-file>
 
     <framework src="src/android/vksdk_library" custom="true" />
-    <source-file src="src/android/Vkontakte.java" target-dir="src/com/stuytime/vkontakte/" />
+    <source-file src="src/android/Vkontakte.java" target-dir="src/com/studytime/vkontakte/" />
   </platform>
 
 </plugin>
