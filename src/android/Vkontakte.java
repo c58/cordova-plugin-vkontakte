@@ -110,11 +110,20 @@ public class Vkontakte extends CordovaPlugin {
         @Override
         public void onResult(VKAccessToken res) {
           // User passed Authorization
-          final String token = res.accessToken;
-          Log.i(TAG, "VK new token: "+token);
-          res.saveTokenToSharedPreferences(getApplicationContext(), sTokenKey);
-          _callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, token));
-          _callbackContext.success();
+          try {
+            final String token = res.accessToken;
+            Log.i(TAG, "VK new token: "+token);
+
+            JSONObject loginDetails = new JSONObject();
+            loginDetails.put("accessToken", token);
+            loginDetails.put("expiresIn", res.expiresIn);
+
+            res.saveTokenToSharedPreferences(getApplicationContext(), sTokenKey);
+            _callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, loginDetails));
+            _callbackContext.success();
+          } catch (JSONException exception) {
+              Log.e(TAG, "JSON error:", exception);
+          }
         }
 
         @Override
