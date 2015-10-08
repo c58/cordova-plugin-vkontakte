@@ -111,6 +111,7 @@
     <framework src="com.vk:androidsdk:+" />
 
     <source-file src="src/android/Vkontakte.java" target-dir="src/com/studytime/vkontakte/" />
+    <source-file src="src/android/VkontakteInitApp.java" target-dir="src/com/studytime/vkontakte/" />
   </platform>
 
 </plugin>
