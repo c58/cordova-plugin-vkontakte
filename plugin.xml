@@ -108,7 +108,8 @@
       <integer name="com_vk_sdk_AppId">$VK_APP_ID</integer>
     </config-file>
 
-    <framework src="src/android/vk.gradle" custom="true" type="gradleReference"/>
+    <framework src="com.vk:androidsdk:+" />
+
     <source-file src="src/android/Vkontakte.java" target-dir="src/com/studytime/vkontakte/" />
   </platform>
 
