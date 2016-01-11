@@ -20,6 +20,9 @@
     if (!inited) {
         NSString *appId = [[NSString alloc] initWithString: [command.arguments objectAtIndex:0]];
         [VKSdk initializeWithDelegate:self andAppId:appId];
+        if(![VKSdk wakeUpSession]) {
+            NSLog(@"VK init error!");
+        }
         inited = YES;
     }
 
